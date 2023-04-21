@@ -1,16 +1,9 @@
 # final_project
 
-A new Flutter project.
+This is a chat application secured with RSA encryption and steganography.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The message which is sent to opponent user is encrypted using opponent user public key and again the ciphertext is encoded in image using Least Significant Bit(LSB) technique and at the receiver side the ciphertext is extracted from the image and decoded using the private key.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+the process is also done for sender as well using sender own public key.
