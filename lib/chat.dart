@@ -84,7 +84,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   .where('channel',
                       isEqualTo: generateChatId(
                           currentUserEmail, widget.opponentEmail))
-                  .orderBy('createdAt', descending: false)
+                  .orderBy('createdAt', descending: true)
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
