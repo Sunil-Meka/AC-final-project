@@ -9,6 +9,8 @@ import 'login.dart';
 import 'rsa_brain.dart';
 
 void main() async {
+  // main function which will run at the start of the application
+  // initialize firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -19,8 +21,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // initailize RSA brain which will create a key pair for the user
     RSABrain _rsaBrain = RSABrain();
-
     return MaterialApp(
       title: 'My App',
       theme: ThemeData(
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
           } else if (snapshot.hasData &&
               snapshot.data != null &&
               _currentUser != null) {
-            print(_currentUser);
+            // update the public key in firestore
             print("updating public key");
             FirebaseFirestore.instance
                 .collection('users')
@@ -43,8 +45,10 @@ class MyApp extends StatelessWidget {
               'publickey': _rsaBrain.getOwnPublicKey().toString(),
               "updated": DateTime.now().toIso8601String()
             });
+            // navigate to dashboard as user is logged in
             return HomeScreen(_rsaBrain);
           } else {
+            // navigate to login screen as user is not logged in
             return LoginScreen(_rsaBrain);
           }
         },

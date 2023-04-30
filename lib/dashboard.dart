@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'chat.dart';
 
 class HomeScreen extends StatelessWidget {
+  // this is the dashboard screen which will show all the users as the chat cards
   final RSABrain rsaBrain;
   HomeScreen(this.rsaBrain);
   @override
@@ -18,6 +19,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icon(Icons.logout),
           onPressed: () {
             FirebaseAuth.instance.signOut();
+            // navigate to login screen as user is logged out
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -28,6 +30,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ]),
       body: StreamBuilder<QuerySnapshot>(
+        // get all the users except the current user
         stream: FirebaseFirestore.instance
             .collection('users')
             .where(
@@ -37,19 +40,23 @@ class HomeScreen extends StatelessWidget {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
+            // show loading if data is not available
             return Center(child: CircularProgressIndicator());
           }
           if (snapshot.data!.docs.length == 0) {
+            // show no users found if there are no users
             return Center(child: Text('No users found'));
           }
+          // show all the users as chat cards
           return ListView(
             children: snapshot.data!.docs.map((document) {
+              // return a chat card for each user with name and email
               return Card(
                 child: ListTile(
                   title: Text(document['displayName']),
                   subtitle: Text(document['email']),
                   onTap: () {
-                    // Navigate to user details screen
+                    // Navigate to chat details screen between current user and the selected user
                     Navigator.push(
                       context,
                       MaterialPageRoute(

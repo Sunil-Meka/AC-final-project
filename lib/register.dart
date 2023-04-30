@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'rsa_brain.dart';
 
 class RegisterScreen extends StatefulWidget {
+  // this is the register screen which will show the register form
   final RSABrain rsaBrain;
   RegisterScreen(this.rsaBrain);
   @override
@@ -16,10 +17,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  String _email = '';
-  String _password = '';
-  String _displayName = '';
-  bool _isLoading = false;
+  String _email = ''; // variables to store email
+  String _password = ''; // variables to store password
+  String _displayName = ''; // variables to store display name
+  bool _isLoading = false; // initial value of loading is false
 
   void _register() async {
     if (_formKey.currentState!.validate()) {
@@ -34,14 +35,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (newUser != null) {
           // Create a new user record in Firestore
           final userRef = _firestore.collection('users').doc(newUser.user!.uid);
-
+          // creating a new user record in firestore with public key(getting from RSA brain which is already initilized at the application start), email, createdAt and display name
           userRef.set({
             'email': _email,
             'displayName': _displayName,
             'createdAt': FieldValue.serverTimestamp(),
             "publickey": widget.rsaBrain.getOwnPublicKey().toString()
           });
-
+          // navigate to dashboard as user is logged in
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -50,6 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           );
         }
       } catch (e) {
+        // show error message if registration fails
         setState(() {
           _isLoading = false;
         });
@@ -79,6 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // form to get email, password and display name
                           TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(labelText: 'Email'),

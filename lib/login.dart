@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
+  // this is the login screen which will show the login form
   final RSABrain rsaBrain;
   LoginScreen(this.rsaBrain);
   @override
@@ -14,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  // variables to store email and password
   late String _email, _password;
 
   @override
@@ -28,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                // form to get email and password
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   validator: (input) {
@@ -55,17 +58,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 32),
+                // login button
                 ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       try {
+                        // login user with email and password
                         UserCredential userCredential = await FirebaseAuth
                             .instance
                             .signInWithEmailAndPassword(
                           email: _email,
                           password: _password,
                         );
+                        // navigate to dashboard as user is logged in
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -73,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         );
                       } on FirebaseAuthException catch (e) {
+                        // error handling
                         if (e.code == 'user-not-found') {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('User not found')),
@@ -92,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 8),
                 ElevatedButton(
                   onPressed: () {
+                    // navigate to register screen
                     Navigator.push(
                       context,
                       MaterialPageRoute(
