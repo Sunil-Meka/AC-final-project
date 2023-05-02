@@ -50,4 +50,13 @@ This project is licensed under the [MIT License](LICENSE).
 
 # Output Screenshots:
 
+Login Screen:
 ![Login](outputs/login.jpeg)
+Register Screen:
+![Register](outputs/register.jpeg)
+Users Screen:
+![Users](outputs/users.jpeg)
+Chat Screen of User 1:
+![Chat](outputs/user1.jpeg)
+Chat Screen of User 2:
+![Chat](outputs/user2.jpeg)
