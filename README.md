@@ -41,7 +41,7 @@ This is a Flutter-based chat application that uses RSA encryption and Steganogra
 We would like to thank the following contributors for their valuable contributions to this project:
 
 - Vijaya Sunil Meka(@Sunil-Meka): Functionalities of the Application
-- prasad (@janedoe): User Interface of the application
+- Sri Venkata Sai Prasadu Karukonala(@saiprasad9467): User Interface of the application
 - Sundeep Reddy Nallamilli(@just-breathing): Debugging and Testing of the Application
 
 ## License
