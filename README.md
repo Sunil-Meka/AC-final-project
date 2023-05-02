@@ -7,6 +7,7 @@ This is a Flutter-based chat application that uses RSA encryption and Steganogra
 - Installation
 - Usage
 - features
+- Functions
 - Contributors
 - License
 
@@ -35,6 +36,16 @@ This is a Flutter-based chat application that uses RSA encryption and Steganogra
 - Integration with Firebase Authentication, Firebase Firestore and Firebase Storage
 - User registration with email and password
 - User authentication with email and password
+
+## Functions
+
+- RSABrain: Initializes the RSA key-pair and provides functions to encrypt and decrypt messages
+- getOwnPublicKey: Returns the public key of the current user
+- getOwnPrivateKey: Returns the private key of the current user
+- setReceiverPublicKey: Sets the public key of the recipient
+- encrypt: Encrypts a message using the recipient's RSA public key and then encodes the cipher text in an image using steganography and returns the image
+- decrypt: Extracts the cipher text from an image using steganography and decrypts it using the current user's RSA private key
+- uploadImage: Uploads an image to Firebase Storage and returns the image URL
 
 ## Contributors
 
